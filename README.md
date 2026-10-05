@@ -1,6 +1,6 @@
 # candles.mk
 
-Онлајн продавница за мирисни свеќи. Статична страница (`index.html`) и една серверска функција (`api/order.js`) која за секоја нарачка праќа мејл преку Gmail.
+Онлајн продавница за мирисни свеќи. Статична страница (`index.html`) и една серверска функција (`api/order.js`) која за секоја нарачка праќа мејл преку Resend.
 
 ## Структура
 
@@ -8,48 +8,35 @@
 index.html        страницата
 img/              фотографии
 api/order.js      прима нарачка и праќа мејл
-package.json      зависност: nodemailer
+package.json      Node 18+, без зависности
 .env.example      потребни променливи
 ```
 
-## 1. Gmail App Password
+## 1. Resend API клуч
 
-Gmail не дозволува праќање со обичната лозинка, потребна е „App Password“.
+Мејловите за нарачки се праќаат преку [Resend](https://resend.com) (бесплатен план).
 
-1. Најави се на contact.candles.mk@gmail.com.
-2. Вклучи 2-Step Verification: https://myaccount.google.com/security
-3. Отвори https://myaccount.google.com/apppasswords, внеси име (на пр. `vercel`) и кликни Create.
-4. Копирај ја лозинката од 16 букви (без празни места).
+1. Регистрирај се на resend.com со contact.candles.mk@gmail.com.
+2. API Keys → Create API Key (дозвола: Sending access) и копирај го клучот (`re_...`).
+3. Клучот не го ставај во кодот, само во Vercel.
+
+Без верификација на домен, Resend праќа од `onboarding@resend.dev` и само до мејлот со кој е отворена Resend сметката. За нарачки до тебе тоа е доволно.
 
 ## 2. Деплој на Vercel
 
-**Преку GitHub (препорачано)**
-
-1. Качи ја папката во ново GitHub репо.
-2. На https://vercel.com/new избери го репото. Framework Preset: **Other**. Build и Output полињата остави ги празни.
-3. Пред Deploy, во **Environment Variables** додај:
+1. На https://vercel.com/new избери го репото `candles-mk`. Framework Preset: **Other**. Build и Output полињата остави ги празни.
+2. Во **Environment Variables** додај:
 
 | Име | Вредност |
 |---|---|
-| `GMAIL_USER` | `contact.candles.mk@gmail.com` |
-| `GMAIL_APP_PASSWORD` | лозинката од чекор 1 |
-| `ORDER_TO` | адресата каде стигаат нарачките (може иста) |
+| `RESEND_API_KEY` | клучот од чекор 1 |
+| `ORDER_TO` | `contact.candles.mk@gmail.com` |
 
-4. Кликни Deploy.
+3. Кликни Deploy.
 
-**Преку CLI**
+Ако ги менуваш променливите подоцна: Deployments → … → **Redeploy**, за да важат.
 
-```bash
-npm i -g vercel
-cd candles-mk
-vercel                 # прв деплој (preview)
-vercel env add GMAIL_USER
-vercel env add GMAIL_APP_PASSWORD
-vercel env add ORDER_TO
-vercel --prod
-```
-
-Ако ги менуваш променливите подоцна, направи нов деплој за да важат.
+**Подоцна (незадолжително):** кога candles.mk ќе работи, во Resend → Domains додај го candles.mk, внеси ги DNS записите и додај `ORDER_FROM` = `candles.mk <naracki@candles.mk>`. Тогаш може да се праќаат мејлови и до купувачите.
 
 ## 3. Домен candles.mk
 
@@ -59,7 +46,7 @@ Vercel → проект → Settings → Domains → додај `candles.mk` и 
 
 Отвори ја страницата, додај свеќа, пополни ја формата и кликни „Нарачај“. Мејл со наслов „Нова нарачка CMK-…“ треба да стигне за неколку секунди.
 
-Ако не стигне: Vercel → проект → Logs → барај `Email failed`. Најчеста причина е погрешна App Password или неисправно име на променлива.
+Ако не стигне: Vercel → проект → Logs → барај `Email failed`. Најчеста причина е погрешен API клуч или неисправно име на променлива.
 
 ## Цени
 

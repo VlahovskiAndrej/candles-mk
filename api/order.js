@@ -1,5 +1,4 @@
-// Vercel serverless function: receives an order from the page and emails it to the shop.
-const nodemailer = require("nodemailer");
+// Vercel serverless function: receives an order from the page and emails it to the shop via Resend.
 
 const PRODUCTS = {
   "jasmine": "Јасмин",
@@ -83,17 +82,23 @@ module.exports = async function handler(req, res) {
   ].join("\n");
 
   try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
+    const apiKey = process.env.RESEND_API_KEY;
+    const to = process.env.ORDER_TO;
+    if (!apiKey || !to) throw new Error("Missing RESEND_API_KEY or ORDER_TO environment variable");
+    const r = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        // onboarding@resend.dev works without domain setup, but only delivers to your Resend account's own email.
+        // After verifying candles.mk in Resend, set ORDER_FROM to e.g. "candles.mk <naracki@candles.mk>".
+        from: process.env.ORDER_FROM || "candles.mk нарачки <onboarding@resend.dev>",
+        to: [to],
+        subject: `Нова нарачка ${ref} · ${name} · ${fmt(total)}`,
+        text,
+        html,
+      }),
     });
-    await transporter.sendMail({
-      from: `"candles.mk нарачки" <${process.env.GMAIL_USER}>`,
-      to: process.env.ORDER_TO || process.env.GMAIL_USER,
-      subject: `Нова нарачка ${ref} · ${name} · ${fmt(total)}`,
-      text,
-      html,
-    });
+    if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text()}`);
   } catch (err) {
     console.error("Email failed:", err);
     return res.status(500).json({ ok: false, error: "email_failed" });

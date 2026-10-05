@@ -267,6 +267,52 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 html{scroll-behavior:smooth}
+
+/* conversion additions */
+.head-actions{display:flex;align-items:center;gap:8px}
+.call-btn{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;border-radius:999px;font-weight:700;text-decoration:none}
+.call-btn svg{color:var(--accent)}
+.offer-chip{margin-top:18px;display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:8px;background:#FFFFFF;border:1.5px solid var(--h-accent);border-radius:999px;padding:8px 16px;color:var(--h-ink)}
+.offer-chip strong{color:var(--h-accent)}
+.offer-chip span{color:var(--h-muted);text-decoration:line-through;font-size:.92rem}
+.sets{padding-block:32px 8px}
+.set-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:22px}
+.set-card{border:1.5px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.set-imgs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--plate)}
+.set-imgs img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.set-body{padding:18px;display:flex;flex-direction:column;gap:6px}
+.set-body h3{font-size:1.15rem}
+.set-body p{color:var(--muted)}
+.set-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px}
+.set-price strong{font-size:1.15rem}
+.set-price s{color:var(--muted);margin-left:4px}
+.card .actions{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.card .sm{display:none}
+.go{background:transparent;color:var(--accent);border:1.5px solid var(--accent);border-radius:999px;padding:9px 16px;font-weight:700;text-align:center;text-decoration:none}
+.go:hover{background:var(--accent-soft)}
+.method{border:0;padding:0;margin:0 0 18px;display:grid;gap:10px}
+.method legend{font-weight:700;font-size:.92rem;margin-bottom:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:14px;cursor:pointer}
+.opt input{margin-top:3px;accent-color:var(--primary);width:18px;height:18px;flex:none}
+.opt strong{display:block}
+.opt small{display:block;color:var(--muted);font-size:.88rem;margin-top:2px}
+.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.call-alt{margin-top:12px;text-align:center;color:var(--muted);font-size:.92rem}
+.call-alt a{color:var(--accent);font-weight:800;text-decoration:none}
+.landing-note{background:var(--accent-soft);border-bottom:1px solid var(--line);font-weight:600;font-size:.95rem}
+.landing-note .wrap{padding-block:10px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.landing-note a{color:var(--accent);font-weight:800}
+.bar .info small{color:var(--accent);font-weight:700}
+@media (max-width:640px){
+  .call-btn span,.cart-word{display:none}
+  .call-btn{padding:8px 10px}
+  .set-row{grid-template-columns:1fr}
+  .card .lg{display:none}
+  .card .sm{display:inline}
+  .card .actions .add,.card .actions .go{padding:9px 10px;font-size:.92rem}
+  .offer-chip{font-size:.92rem;padding:6px 14px}
+  .hero .ctas .btn{flex:1 1 auto}
+}
 </style>
 
 <style>*{margin:0}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -280,14 +326,21 @@ html{scroll-behavior:smooth}
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#top"><svg width="18" height="22" viewBox="0 0 18 22" aria-hidden="true"><path d="M9 1c3 4 5 6.5 5 9.5A5 5 0 0 1 4 10.5C4 7.5 6 5 9 1z" fill="var(--flame)"/><rect x="8" y="14" width="2" height="7" rx="1" fill="currentColor"/></svg><span>candles<span class="dot">.</span>mk</span></a>
+    <div class="head-actions">
+    <a class="call-btn" href="tel:+38973857930" aria-label="Јави се на 073 857 930">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+      <span class="num">073 857 930</span>
+    </a>
     <button class="cart-btn" id="cartBtn" type="button" aria-label="Кошничка">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
-      Кошничка <span class="badge num" id="cartCount">0</span>
+      <span class="cart-word">Кошничка</span> <span class="badge num" id="cartCount">0</span>
     </button>
+    </div>
   </div>
 </header>
 
 <main id="top">
+  <div class="landing-note" id="landingNote" hidden><div class="wrap"><span id="landingText"></span> <a href="#checkout">Кон нарачка</a></div></div>
   <section class="hero">
     <div class="wrap">
       <div class="hero-banner">
@@ -297,14 +350,16 @@ html{scroll-behavior:smooth}
       </picture>
       <div class="hero-copy">
         <p class="eyebrow">Рачно изработени мирисни свеќи</p>
-        <h1 style="margin-top:12px">Мирис што го <em>менува</em> домот</h1>
-        <p class="lead">Шест долготрајни мириси, рачно излеани од висококвалитетен восок во лимени кутии со мандала шари. Запали една за мирна вечер или подари ги во комплет.</p>
+        <h1 id="heroTitle" style="margin-top:12px">Мирис што го <em>менува</em> домот</h1>
+        <p class="lead" id="heroLead">Шест долготрајни мириси, рачно излеани од висококвалитетен восок во лимени кутии со мандала шари. Запали една за мирна вечер или подари ги во комплет.</p>
+        <p class="offer-chip"><strong class="num">3 свеќи за 2.490 ден.</strong> <span>наместо 2.970</span></p>
         <div class="ctas">
-          <a class="btn btn-flame" href="#products">Избери мирис</a>
+          <a class="btn btn-flame" href="#sets">Готови комплети</a>
+          <a class="btn btn-ghost" href="#products">Избери мириси</a>
         </div>
         <ul class="perks">
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Рачна изработка</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Бесплатна достава низ Македонија</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Бесплатна достава за 1–2 дена</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Плаќање при достава</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Кутија со капаче, идеална за подарок</li>
         </ul>
@@ -336,6 +391,33 @@ html{scroll-behavior:smooth}
           <h3>Спремна за подарок</h3>
           <p>Декоративна лимена кутија со капаче. Кога ќе догори, кутијата останува за накит или ситници.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sets" id="sets">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Готови комплети · 3 свеќи за 2.490 ден.</p><h2 style="margin-top:8px">Не знаеш кои да ги избереш?</h2></div>
+        <p>Еден клик и комплетот е во кошничката. Мирисите може да ги смениш подолу.</p>
+      </div>
+      <div class="set-row">
+        <article class="set-card">
+          <div class="set-imgs"><img src="img/apple-cinnamon.jpg" alt="Јаболко и цимет" loading="lazy"><img src="img/vanilla.jpg" alt="Ванила" loading="lazy"><img src="img/lavender.jpg" alt="Лаванда" loading="lazy"></div>
+          <div class="set-body">
+            <h3>Топол комплет</h3>
+            <p>Јаболко и цимет · Ванила · Лаванда</p>
+            <div class="set-foot"><span class="set-price num"><strong>2.490 ден.</strong> <s>2.970</s></span><button type="button" class="add" data-set="warm">Додај комплет</button></div>
+          </div>
+        </article>
+        <article class="set-card">
+          <div class="set-imgs"><img src="img/lemon.jpg" alt="Лимон" loading="lazy"><img src="img/jasmine.jpg" alt="Јасмин" loading="lazy"><img src="img/gardenia.jpg" alt="Гарденија" loading="lazy"></div>
+          <div class="set-body">
+            <h3>Свеж комплет</h3>
+            <p>Лимон · Јасмин · Гарденија</p>
+            <div class="set-foot"><span class="set-price num"><strong>2.490 ден.</strong> <s>2.970</s></span><button type="button" class="add" data-set="fresh">Додај комплет</button></div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -405,10 +487,15 @@ html{scroll-behavior:smooth}
   <section class="checkout" id="checkout">
     <div class="wrap">
       <p class="eyebrow">Нарачка</p>
-      <h2 style="margin-top:8px">Каде да ги доставиме?</h2>
+      <h2 style="margin-top:8px">Нарачај за една минута</h2>
       <div class="co-grid">
         <div class="panel" id="formPanel">
           <form id="orderForm" novalidate>
+            <fieldset class="method">
+              <legend>Како сакаш да ја добиеш?</legend>
+              <label class="opt"><input type="radio" name="delivery" id="dDelivery" value="delivery" checked><span><strong>Достава до адреса</strong><small>Бесплатна, стигнува за 1–2 дена. Плаќаш при достава.</small></span></label>
+              <label class="opt"><input type="radio" name="delivery" id="dPickup" value="pickup"><span><strong>Подигни лично во Скопје</strong><small>Побрзо. ул. Воин Драшкоци. Ќе ти се јавиме кога е спремна, плаќаш при подигање.</small></span></label>
+            </fieldset>
             <div class="field" id="f-name">
               <label for="name">Име и презиме</label>
               <input id="name" name="name" autocomplete="name" placeholder="Марија Петровска">
@@ -417,7 +504,7 @@ html{scroll-behavior:smooth}
             <div class="field" id="f-phone">
               <label for="phone">Телефонски број</label>
               <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="070 123 456">
-              <span class="hint">Курирот ќе ве контактира на овој број пред доставата.</span>
+              <span class="hint" id="phoneHint">Ќе ви се јавиме за потврда, а курирот пред доставата.</span>
               <span class="errmsg" hidden>Внесете валиден телефонски број, на пр. 070 123 456.</span>
             </div>
             <div class="field" id="f-address">
@@ -430,11 +517,12 @@ html{scroll-behavior:smooth}
               <textarea id="notes" name="notes" placeholder="Кат, стан, влез, најдобро време за достава…"></textarea>
             </div>
             <div class="hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
-            <div class="pay" role="radiogroup" aria-label="Начин на плаќање">
-              <span class="radio" role="radio" aria-checked="true"></span>
-              <div><strong>Плаќање при достава</strong><span>Плаќате во готово кога ќе ја примите пратката. Доставата е бесплатна.</span></div>
+            <div class="pay">
+              <span class="radio" aria-hidden="true"></span>
+              <div><strong id="payTitle">Плаќање при достава</strong><span id="payText">Плаќате во готово кога ќе ја примите пратката. Без картичка.</span></div>
             </div>
             <button class="btn btn-flame submit" id="submitBtn" type="submit">Нарачај</button>
+            <p class="call-alt">Повеќе сакаш по телефон? Јави се на <a href="tel:+38973857930" class="num">073 857 930</a></p>
             <p class="form-err" id="formErr" hidden></p>
           </form>
           <div class="done" id="done" hidden></div>
@@ -445,7 +533,7 @@ html{scroll-behavior:smooth}
             <div id="lines"></div>
             <div class="tot">
               <div><span>Свеќи</span><span class="num" id="tCount">0</span></div>
-              <div><span>Достава</span><span class="free">Бесплатна</span></div>
+              <div><span id="shipLabel">Достава (1–2 дена)</span><span class="free" id="shipValue">Бесплатна</span></div>
               <div class="grand"><span>Вкупно</span><span class="num" id="tTotal">0 ден.</span></div>
             </div>
             <p class="nudge" id="nudge" hidden></p>
@@ -461,6 +549,7 @@ html{scroll-behavior:smooth}
       <h2 style="margin-top:8px">Најчести прашања</h2>
       <div class="faq-grid">
         <details><summary>Како плаќам?</summary><p>Само при достава, во готово кај курирот. Не ви треба платежна картичка.</p></details>
+        <details><summary>Колку брзо стигнува?</summary><p>За 1–2 дена до вашата адреса. Ако ви треба побрзо, изберете подигање лично во Скопје, на ул. Воин Драшкоци.</p></details>
         <details><summary>Колку чини доставата?</summary><p>Ништо. Доставата е бесплатна за секоја нарачка низ цела Македонија.</p></details>
         <details><summary>Може ли да комбинирам различни мириси?</summary><p>Да. Цената за 2 или 3 свеќи важи за која било комбинација на мириси.</p></details>
         <details><summary>Што ако нарачам повеќе од 3 свеќи?</summary><p>Секои 3 свеќи се по 2.490 ден., а остатокот се пресметува по цената за 1 или 2 свеќи.</p></details>
@@ -508,7 +597,7 @@ html{scroll-behavior:smooth}
 </footer>
 
 <div class="bar" id="bar">
-  <div class="info"><span id="barCount">0 свеќи</span><small class="num" id="barTotal">0 ден.</small></div>
+  <div class="info"><span><span id="barCount">0 свеќи</span> · <span class="num" id="barTotal">0 ден.</span></span><small id="barNudge"></small></div>
   <a class="btn btn-flame" href="#checkout">Кон нарачка</a>
 </div>
 
@@ -547,14 +636,26 @@ function renderGrid(){
         <p class="specs">Рачна изработка · Квалитетен восок · Кутија со капаче</p>
         <div class="foot">
           <span class="p num">990 ден.</span>
-          ${q ? `<div class="stepper"><button type="button" data-d="-1" aria-label="Една помалку">−</button><span class="num" aria-live="polite">${q}</span><button type="button" data-d="1" aria-label="Една повеќе">+</button></div>`
-              : `<button class="add" type="button" data-d="1">Додај во кошничка</button>`}
+          ${q ? `<div class="stepper"><button type="button" data-d="-1" aria-label="Една помалку">−</button><span class="num" aria-live="polite">${q}</span><button type="button" data-d="1" aria-label="Една повеќе">+</button></div>` : ``}
+        </div>
+        <div class="actions">
+          ${q ? `<a class="go" href="#checkout">Кон нарачка</a>`
+              : `<button class="add" type="button" data-d="1"><span class="lg">Додај во кошничка</span><span class="sm">Додај</span></button><button class="go" type="button" data-buy="1"><span class="lg">Нарачај веднаш</span><span class="sm">Купи веднаш</span></button>`}
         </div>
       </div>`;
     el.querySelectorAll("[data-d]").forEach(b => b.addEventListener("click", () => change(p.id, +b.dataset.d)));
+    el.querySelectorAll("[data-buy]").forEach(b => b.addEventListener("click", () => { change(p.id, 1); goCheckout(); }));
     grid.appendChild(el);
   }
 }
+const SETS = {warm:["apple-cinnamon","vanilla","lavender"], fresh:["lemon","jasmine","gardenia"]};
+const SET_NAMES = {warm:"Топол комплет", fresh:"Свеж комплет"};
+function addSet(key){
+  for (const id of SETS[key] || []) cart[id] = (cart[id] || 0) + 1;
+  save(); renderGrid(); renderCart();
+}
+function goCheckout(){ document.getElementById("checkout").scrollIntoView({behavior:"smooth"}); }
+document.querySelectorAll("[data-set]").forEach(b => b.addEventListener("click", () => { addSet(b.dataset.set); goCheckout(); }));
 function change(id, d){
   const q = Math.max(0, (cart[id]||0) + d);
   if (q) cart[id] = q; else delete cart[id];
@@ -582,13 +683,24 @@ function renderCart(){
   }
   const nudge = document.getElementById("nudge");
   const r = n % 3;
-  if (n && r === 1){ nudge.hidden = false; nudge.textContent = "Додај уште 1 свеќа и заштеди 290 ден."; }
-  else if (n && r === 2){ nudge.hidden = false; nudge.textContent = "Додај уште 1 свеќа за само 800 ден. и заштеди 480 ден."; }
-  else if (n){ nudge.hidden = false; nudge.textContent = "Ја доби најдобрата цена: 830 ден. по свеќа."; }
-  else nudge.hidden = true;
+  const msg = !n ? "" : r === 1 ? "Додај уште 1 свеќа и заштеди 290 ден." : r === 2 ? "Додај уште 1 свеќа за само 800 ден. и заштеди 480 ден." : "Ја доби најдобрата цена: 830 ден. по свеќа.";
+  nudge.hidden = !msg; nudge.textContent = msg;
+  document.getElementById("barNudge").textContent = !n ? "" : r === 1 ? "+1 свеќа = заштеда 290 ден." : r === 2 ? "+1 свеќа само 800 ден." : "Најдобра цена: 830 ден./свеќа";
 }
 
 document.getElementById("cartBtn").addEventListener("click", () => document.getElementById("checkout").scrollIntoView());
+
+/* delivery method */
+const isPickup = () => document.getElementById("dPickup").checked;
+function applyMethod(){
+  const pk = isPickup();
+  document.getElementById("f-address").hidden = pk;
+  document.getElementById("payTitle").textContent = pk ? "Плаќање при подигање" : "Плаќање при достава";
+  document.getElementById("payText").textContent = pk ? "Плаќате во готово кога ќе ја подигнете во Скопје, на ул. Воин Драшкоци." : "Плаќате во готово кога ќе ја примите пратката. Без картичка.";
+  document.getElementById("shipLabel").textContent = pk ? "Подигање во Скопје" : "Достава (1–2 дена)";
+  document.getElementById("phoneHint").textContent = pk ? "Ќе ви се јавиме кога нарачката е спремна за подигање." : "Ќе ви се јавиме за потврда, а курирот пред доставата.";
+}
+document.querySelectorAll("input[name=delivery]").forEach(r => r.addEventListener("change", applyMethod));
 
 /* order submit */
 let orderDone = false;
@@ -599,8 +711,9 @@ form.addEventListener("submit", async e => {
   const v = id => document.getElementById(id).value.trim();
   const name = v("name"), phone = v("phone"), address = v("address"), notes = v("notes");
   const digits = phone.replace(/\D/g, "");
-  const okName = name.length >= 3, okPhone = digits.length >= 8 && digits.length <= 15, okAddr = address.length >= 5;
+  const okName = name.length >= 3, okPhone = digits.length >= 8 && digits.length <= 15, okAddr = isPickup() || address.length >= 5;
   setBad("f-name", !okName); setBad("f-phone", !okPhone); setBad("f-address", !okAddr);
+  const delivery = isPickup() ? "pickup" : "delivery";
   const err = document.getElementById("formErr");
   const n = count();
   if (!n){ err.hidden = false; err.textContent = "Кошничката е празна. Додај барем една свеќа пред да нарачаш."; return; }
@@ -614,19 +727,21 @@ form.addEventListener("submit", async e => {
   try {
     const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 15000);
     const res = await fetch("/api/order", {method:"POST", headers:{"Content-Type":"application/json"}, signal:ctrl.signal,
-      body: JSON.stringify({name, phone, address, notes, items: items.map(i => ({id:i.id, qty:i.qty})), website: v("website")})});
+      body: JSON.stringify({name, phone, address: delivery === "pickup" ? "" : address, notes, delivery, items: items.map(i => ({id:i.id, qty:i.qty})), website: v("website")})});
     clearTimeout(t);
     const data = await res.json().catch(() => ({}));
     if (res.ok && data.ok){ saved = true; ref = data.ref; order.total = data.total; }
   } catch(e) { saved = false; }
   btn.disabled = false; btn.textContent = "Нарачај";
-  const summaryText = `Нарачка candles.mk\n${items.map(i => `${i.name} × ${i.qty}`).join("\n")}\nВкупно: ${fmt(order.total)} (плаќање при достава)\n${name}, ${phone}\n${address}${notes ? "\n" + notes : ""}`;
+  const summaryText = `Нарачка candles.mk\n${items.map(i => `${i.name} × ${i.qty}`).join("\n")}\nВкупно: ${fmt(order.total)} (${delivery === "pickup" ? "подигање во Скопје, плаќање при подигање" : "достава, плаќање при достава"})\n${name}, ${phone}${delivery === "pickup" ? "" : "\n" + address}${notes ? "\n" + notes : ""}`;
   const done = document.getElementById("done");
   if (saved){
     orderDone = true;
     done.innerHTML = `<div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
       <h3>Ви благодариме, ${escapeHtml(name.split(" ")[0])}!</h3>
-      <p>Нарачката е примена. Ќе ве контактираме на <strong>${escapeHtml(phone)}</strong> за потврда. Плаќате <strong>${fmt(order.total)}</strong> при достава.</p>
+      <p>${delivery === "pickup"
+        ? `Нарачката е примена. Ќе ви се јавиме на <strong>${escapeHtml(phone)}</strong> кога е спремна за подигање на ул. Воин Драшкоци, Скопје. Плаќате <strong>${fmt(order.total)}</strong> при подигање.`
+        : `Нарачката е примена. Ќе ви се јавиме на <strong>${escapeHtml(phone)}</strong> за потврда. Стигнува за 1–2 дена, плаќате <strong>${fmt(order.total)}</strong> при достава.`}</p>
       <p class="ref">Број на нарачка: ${ref}</p>`;
     form.hidden = true; done.hidden = false;
     for (const k of Object.keys(cart)) delete cart[k];
@@ -649,7 +764,36 @@ document.querySelectorAll(".c-copy").forEach(b => b.addEventListener("click", as
   b.textContent = "Копирано"; setTimeout(() => b.textContent = "Копирај", 1800);
 }));
 
-renderGrid(); renderCart();
+/* ad landing links: ?scent=lavender,vanilla  ?set=warm|fresh  ?offer=gift|bundle */
+(function landing(){
+  let q; try { q = new URLSearchParams(location.search); } catch(e) { return; }
+  const added = [];
+  const scents = (q.get("scent") || "").split(",").map(x => x.trim().toLowerCase()).filter(Boolean);
+  for (const id of scents){
+    const p = PRODUCTS.find(x => x.id === id);
+    if (p && !cart[id]){ cart[id] = 1; added.push(p.name); }
+  }
+  const set = (q.get("set") || "").toLowerCase();
+  if (SETS[set] && !SETS[set].every(id => cart[id])){ addSet(set); added.push(SET_NAMES[set]); }
+  save();
+  const offer = (q.get("offer") || "").toLowerCase();
+  const title = document.getElementById("heroTitle"), lead = document.getElementById("heroLead");
+  if (offer === "gift"){
+    title.innerHTML = "Подарок што <em>секогаш</em> успева";
+    lead.textContent = "Рачно изработена мирисна свеќа во шарена лимена кутија, спремна за подарок. Без дополнително пакување.";
+  } else if (offer === "bundle"){
+    title.innerHTML = "Избери <em>3 мириси</em> за 2.490 ден.";
+    document.querySelector(".offer-chip").hidden = true;
+    lead.textContent = "Комбинирај ги мирисите како сакаш. Бесплатна достава за 1–2 дена и плаќање при достава.";
+  }
+  if (added.length){
+    const n = count();
+    document.getElementById("landingText").textContent = `${added.join(", ")} ${added.length === 1 ? "е" : "се"} во кошничката.` + (n % 3 ? ` Додај уште ${3 - n % 3} за цена од 2.490 ден. за 3.` : "");
+    document.getElementById("landingNote").hidden = false;
+  }
+})();
+
+renderGrid(); renderCart(); applyMethod();
 </script>
 
 </body>

@@ -34,6 +34,7 @@ module.exports = async function handler(req, res) {
   const phone = clean(body.phone, 40);
   const address = clean(body.address, 300);
   const notes = clean(body.notes, 1000);
+  const pickup = body.delivery === "pickup";
   const digits = phone.replace(/\D/g, "");
 
   const items = (Array.isArray(body.items) ? body.items : [])
@@ -43,7 +44,7 @@ module.exports = async function handler(req, res) {
 
   const count = items.reduce((a, i) => a + i.qty, 0);
 
-  if (name.length < 3 || digits.length < 8 || digits.length > 15 || address.length < 5 || !count || count > 100) {
+  if (name.length < 3 || digits.length < 8 || digits.length > 15 || (!pickup && address.length < 5) || !count || count > 100) {
     return res.status(400).json({ ok: false, error: "invalid_order" });
   }
 
@@ -62,22 +63,23 @@ module.exports = async function handler(req, res) {
       ${rows}
       <tr><td style="padding:8px 12px"><strong>Вкупно (${count} ${count === 1 ? "свеќа" : "свеќи"})</strong></td><td style="padding:8px 12px;text-align:right"><strong>${fmt(total)}</strong></td></tr>
     </table>
-    <p style="margin:0 0 4px"><strong>Плаќање:</strong> при достава (готовина) · Достава: бесплатна</p>
+    <p style="margin:0 0 4px;padding:10px 12px;background:${pickup ? "#FFF4DE" : "#F3EEFA"};border-radius:8px"><strong>${pickup ? "ПОДИГАЊЕ ЛИЧНО во Скопје" : "ДОСТАВА до адреса (бесплатна)"}</strong> · плаќање во готово ${pickup ? "при подигање" : "при достава"}</p>
     <h3 style="margin:20px 0 8px">Купувач</h3>
     <p style="margin:0 0 4px"><strong>Име:</strong> ${esc(name)}</p>
     <p style="margin:0 0 4px"><strong>Телефон:</strong> <a href="tel:${esc(digits)}">${esc(phone)}</a></p>
-    <p style="margin:0 0 4px"><strong>Адреса:</strong> ${esc(address)}</p>
+    ${pickup ? "" : `<p style="margin:0 0 4px"><strong>Адреса:</strong> ${esc(address)}</p>`}
     ${notes ? `<p style="margin:0 0 4px"><strong>Дополнителни детали:</strong> ${esc(notes)}</p>` : ""}
   </div>`;
 
   const text = [
     `Нова нарачка ${ref} (${when})`,
     ...items.map((i) => `${i.name} × ${i.qty}`),
-    `Вкупно: ${fmt(total)} — плаќање при достава`,
+    `Вкупно: ${fmt(total)}`,
+    pickup ? "ПОДИГАЊЕ ЛИЧНО во Скопје, плаќање при подигање" : "ДОСТАВА до адреса, плаќање при достава",
     ``,
     `Име: ${name}`,
     `Телефон: ${phone}`,
-    `Адреса: ${address}`,
+    pickup ? "" : `Адреса: ${address}`,
     notes ? `Детали: ${notes}` : "",
   ].join("\n");
 
@@ -93,7 +95,7 @@ module.exports = async function handler(req, res) {
         // After verifying candles.mk in Resend, set ORDER_FROM to e.g. "candles.mk <naracki@candles.mk>".
         from: process.env.ORDER_FROM || "candles.mk нарачки <onboarding@resend.dev>",
         to: [to],
-        subject: `Нова нарачка ${ref} · ${name} · ${fmt(total)}`,
+        subject: `Нова нарачка ${ref} · ${pickup ? "ПОДИГАЊЕ · " : ""}${name} · ${fmt(total)}`,
         text,
         html,
       }),

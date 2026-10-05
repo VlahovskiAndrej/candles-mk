@@ -297,6 +297,8 @@ html{scroll-behavior:smooth}
 .opt strong{display:block}
 .opt small{display:block;color:var(--muted);font-size:.88rem;margin-top:2px}
 .opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.guarantee{display:flex;gap:10px;align-items:flex-start;margin:0 0 14px;font-size:.92rem;color:var(--ink)}
+.guarantee svg{flex:none;color:#1F7A4D;margin-top:1px}
 .call-alt{margin-top:12px;text-align:center;color:var(--muted);font-size:.92rem}
 .call-alt a{color:var(--accent);font-weight:800;text-decoration:none}
 .landing-note{background:var(--accent-soft);border-bottom:1px solid var(--line);font-weight:600;font-size:.95rem}
@@ -362,6 +364,7 @@ html{scroll-behavior:smooth}
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Бесплатна достава за 1–2 дена</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Плаќање при достава</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Кутија со капаче, идеална за подарок</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Стигна оштетена? Ја заменуваме бесплатно</li>
         </ul>
       </div>
       </div>
@@ -521,6 +524,7 @@ html{scroll-behavior:smooth}
               <span class="radio" aria-hidden="true"></span>
               <div><strong id="payTitle">Плаќање при достава</strong><span id="payText">Плаќате во готово кога ќе ја примите пратката. Без картичка.</span></div>
             </div>
+            <p class="guarantee"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span><strong>Гаранција:</strong> ако свеќата стигне оштетена, ја заменуваме бесплатно.</span></p>
             <button class="btn btn-flame submit" id="submitBtn" type="submit">Нарачај</button>
             <p class="call-alt">Повеќе сакаш по телефон? Јави се на <a href="tel:+38973857930" class="num">073 857 930</a></p>
             <p class="form-err" id="formErr" hidden></p>
@@ -550,6 +554,7 @@ html{scroll-behavior:smooth}
       <div class="faq-grid">
         <details><summary>Како плаќам?</summary><p>Само при достава, во готово кај курирот. Не ви треба платежна картичка.</p></details>
         <details><summary>Колку брзо стигнува?</summary><p>За 1–2 дена до вашата адреса. Ако ви треба побрзо, изберете подигање лично во Скопје, на ул. Воин Драшкоци.</p></details>
+        <details><summary>Што ако свеќата стигне оштетена?</summary><p>Ја заменуваме бесплатно, без дополнителни трошоци. Јавете ни се на 073 857 930 и испратете ни фотографија од оштетувањето.</p></details>
         <details><summary>Колку чини доставата?</summary><p>Ништо. Доставата е бесплатна за секоја нарачка низ цела Македонија.</p></details>
         <details><summary>Може ли да комбинирам различни мириси?</summary><p>Да. Цената за 2 или 3 свеќи важи за која било комбинација на мириси.</p></details>
         <details><summary>Што ако нарачам повеќе од 3 свеќи?</summary><p>Секои 3 свеќи се по 2.490 ден., а остатокот се пресметува по цената за 1 или 2 свеќи.</p></details>

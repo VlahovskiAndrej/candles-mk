@@ -16,7 +16,7 @@ package.json      зависност: nodemailer
 
 Gmail не дозволува праќање со обичната лозинка, потребна е „App Password“.
 
-1. Најави се на candles.mk@gmail.com.
+1. Најави се на contact.candles.mk@gmail.com.
 2. Вклучи 2-Step Verification: https://myaccount.google.com/security
 3. Отвори https://myaccount.google.com/apppasswords, внеси име (на пр. `vercel`) и кликни Create.
 4. Копирај ја лозинката од 16 букви (без празни места).
@@ -31,7 +31,7 @@ Gmail не дозволува праќање со обичната лозинк�
 
 | Име | Вредност |
 |---|---|
-| `GMAIL_USER` | `candles.mk@gmail.com` |
+| `GMAIL_USER` | `contact.candles.mk@gmail.com` |
 | `GMAIL_APP_PASSWORD` | лозинката од чекор 1 |
 | `ORDER_TO` | адресата каде стигаат нарачките (може иста) |
 

@@ -488,8 +488,8 @@ html{scroll-behavior:smooth}
       <div class="c-item">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
         <span class="c-label">Е-пошта</span>
-        <a class="c-val" href="mailto:candles.mk@gmail.com">candles.mk@gmail.com</a>
-        <button type="button" class="c-copy" data-copy="candles.mk@gmail.com">Копирај</button>
+        <a class="c-val" href="mailto:contact.candles.mk@gmail.com">contact.candles.mk@gmail.com</a>
+        <button type="button" class="c-copy" data-copy="contact.candles.mk@gmail.com">Копирај</button>
       </div>
       <div class="c-item">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -503,7 +503,7 @@ html{scroll-behavior:smooth}
 <footer>
   <div class="wrap">
     <span>© 2026 candles.mk</span>
-    <span class="num">073 857 930 · candles.mk@gmail.com · ул. Воин Драшкоци, Скопје</span>
+    <span class="num">073 857 930 · contact.candles.mk@gmail.com · ул. Воин Драшкоци, Скопје</span>
   </div>
 </footer>
 
@@ -634,7 +634,7 @@ form.addEventListener("submit", async e => {
     done.scrollIntoView({block:"center"});
   } else {
     err.hidden = false;
-    err.innerHTML = `Нарачката не можеше да се зачува. Обидете се повторно или копирајте ја и испратете ни ја на 073 857 930 или candles.mk@gmail.com.<div class="copybox" id="copybox">${escapeHtml(summaryText)}</div><button type="button" class="btn btn-ghost" id="copyBtn" style="margin-top:10px">Копирај ја нарачката</button>`;
+    err.innerHTML = `Нарачката не можеше да се зачува. Обидете се повторно или копирајте ја и испратете ни ја на 073 857 930 или contact.candles.mk@gmail.com.<div class="copybox" id="copybox">${escapeHtml(summaryText)}</div><button type="button" class="btn btn-ghost" id="copyBtn" style="margin-top:10px">Копирај ја нарачката</button>`;
     document.getElementById("copyBtn").addEventListener("click", async ev => {
       try { await navigator.clipboard.writeText(summaryText); ev.target.textContent = "Копирано"; }
       catch(x){ const r = document.createRange(); r.selectNodeContents(document.getElementById("copybox")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }

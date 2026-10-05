@@ -1,0 +1,12 @@
+{
+  "name": "candles-mk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "candles.mk online store with order emails",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}
